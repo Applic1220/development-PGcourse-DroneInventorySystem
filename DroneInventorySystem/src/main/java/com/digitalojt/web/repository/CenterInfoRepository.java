@@ -29,7 +29,9 @@ public interface CenterInfoRepository extends JpaRepository<CenterInfo, Integer>
 			"(:region = '' OR s.address LIKE %:region%) AND " +
 			"(:storageCapacityFrom IS NULL OR s.currentStorageCapacity >= :storageCapacityFrom) AND " +
 			"(:storageCapacityTo IS NULL OR s.currentStorageCapacity <= :storageCapacityTo) AND " +
-			"(s.operationalStatus = 0)")
+			"(s.deleteFlag = 0) AND " +
+			"(s.operationalStatus = 0) " +
+			"ORDER BY s.address ")
 	List<CenterInfo> findActiveCenters(
 			String centerName,
 			String region,
